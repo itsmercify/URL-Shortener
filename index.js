@@ -30,8 +30,6 @@ app.post("/urls/create", async (req, res) => {
     let slug = req.body.slug;
     if (!slug) slug = nanoid(5);
 
-    console.log(req.body);
-
     const alreadyExists = await urls.findOne({ slug: slug });
     if (alreadyExists) return res.status(400).send({ message: "The provided slug already exists." });
 
@@ -64,7 +62,7 @@ app.get("/urls/get", async (req, res) => {
         clicks: data.clicks
     });
 
-})
+});
 
 app.get("/*", async (req, res) => {
 
