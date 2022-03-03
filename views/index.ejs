@@ -113,17 +113,11 @@
             };
 
             const div = document.getElementById("slug");
-            div.textContent = `You have successfully created a short link! See `;
+            div.innerHTML = `You have successfully created a short link! See <a href=<%= url %>${data.slug} target="_blank"><%= url %>${data.slug}</a><br>I have also copied the link to your clipboard`;
             div.className = "alert alert-primary align-items-center";
             div.role = "alert";
 
-            const link = document.createElement("a");
-            link.href = `<%= url %>${data.slug}`;
-            link.setAttribute("target", "_blank")
-            link.innerHTML = `<%= url %>${data.slug}`;
-
-            div.appendChild(link);
-
+            navigator.clipboard.writeText(`<%= url %>${data.slug}`);
         };
         document.getElementById("button_clicker").addEventListener("click", click); </script>
 </body>
