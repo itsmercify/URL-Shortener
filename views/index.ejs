@@ -41,7 +41,7 @@
         <div id="slug"></div>
         <h1 id="heading"><img
                 src="https://cdn.discordapp.com/attachments/795689556569096192/948984194703458334/4906292.png"
-                 width="90">URL Shortner</h1>
+                width="90">URL Shortner</h1>
         <form>
             <div class="mb-3">
                 <label class="form-label">Shorten your link</label>
@@ -57,6 +57,38 @@
         async function click() {
 
             const slug = document.getElementById("input_slug").value ?? null;
+
+            if (slug) {
+                if (slug.length > 10) {
+                    const div = document.getElementById("slug");
+                    const emoji = document.createElement("i");
+                    emoji.className = "bi bi-exclamation-circle-fill";
+                    emoji.style.fontSize = "15px"
+                    div.textContent = "The slug is more than 10 characters in length ";
+                    div.style.fontSize = "15px";
+                    div.style.fontWeight = 'bold'
+                    div.className = "alert alert-danger align-items-center";
+                    div.role = "alert";
+
+                    div.append(emoji);
+                    return;
+                };
+                const regex = new RegExp("^[a-zA-Z]*$");
+                if (!regex.test(slug)) {
+                    const div = document.getElementById("slug");
+                    const emoji = document.createElement("i");
+                    emoji.className = "bi bi-exclamation-circle-fill";
+                    emoji.style.fontSize = "15px"
+                    div.textContent = "The slug contains spaces, special characters and (or) numbers ";
+                    div.style.fontSize = "15px";
+                    div.style.fontWeight = 'bold'
+                    div.className = "alert alert-danger align-items-center";
+                    div.role = "alert";
+
+                    div.append(emoji);
+                    return;
+                }
+            }
             const element = document.getElementById("input");
             if (!element.value) {
 
